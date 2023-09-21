@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/__pycache__/shared_settings.cpython-39.pyc
+/demo.pyproj.user
+/__pycache__/*
