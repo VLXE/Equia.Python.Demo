@@ -1,8 +1,9 @@
 import asyncio
+from pickle import TRUE
 import matplotlib.pyplot as plt
 from equia.models import CalculationComposition, ExceptionInfo, ProblemDetails
 from equia.equia_client import EquiaClient
-from equia.demofluids.fluids import nHexane_Ethylene_HDPE7
+from equia.demofluids.demofluid1_nHexane_Ethylene_HDPE7 import demofluid1_nHexane_Ethylene_HDPE7
 from shared_settings import sharedsettings
 
 def create_client():
@@ -31,8 +32,11 @@ async def call_phase_diagram():
     client = create_client()
 
     input = client.get_phasediagam_standard_input()
-    input.fluid = nHexane_Ethylene_HDPE7()
-    input.fluid_id = None
+    input.fluid = demofluid1_nHexane_Ethylene_HDPE7() #1 Use predefined demo fluid
+    input.fluidid = None #No needed since we supply fluid in line above
+    input.sle = True #Ask to include the SLE part of the phasediagram
+    input.slve = True #Ask to include the SLVE part of the phasediagram
+    input.vlle = True #Ask to include the VLLE part of the phasediagram
     input.components = [
       CalculationComposition(mass=0.78), 
       CalculationComposition(mass=0.02), 

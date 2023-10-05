@@ -2,7 +2,7 @@ from ast import Str
 import asyncio
 from equia.models import FluidAddResult, ExceptionInfo, ApiFluid, ProblemDetails
 from equia.equia_client import EquiaClient
-from equia.demofluids.fluids import nHexane_Ethylene_HDPE7
+from equia.demofluids.demofluid1_nHexane_Ethylene_HDPE7 import demofluid1_nHexane_Ethylene_HDPE7
 from shared_settings import sharedsettings
 
 def create_client():
@@ -35,7 +35,7 @@ async def request_fluid():
     client = create_client()
 
     input = client.get_fluid_add_input()
-    input.fluid = fluid = nHexane_Ethylene_HDPE7()
+    input.fluid = fluid = demofluid1_nHexane_Ethylene_HDPE7()
 
     result: FluidAddResult = await client.call_fluid_add_async(input)
     # Always do the cleanup
@@ -44,7 +44,7 @@ async def request_fluid():
     if (isinstance(result, ProblemDetails)):
         print_problem_details(result)
     elif (result.success == True):
-        print_fluid(result.fluid_id)
+        print_fluid(result.fluidid)
     else:
         print_exception_info(result.exception_info)
 

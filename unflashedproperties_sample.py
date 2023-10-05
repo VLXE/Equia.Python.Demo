@@ -2,7 +2,7 @@ import asyncio
 import matplotlib.pyplot as plt
 from equia.models import CalculationComposition, ApiOutputUnflashedPropertyResult, ExceptionInfo, ProblemDetails
 from equia.equia_client import EquiaClient
-from equia.demofluids.fluids import nHexane_Ethylene_HDPE7
+from equia.demofluids.demofluid1_nHexane_Ethylene_HDPE7 import demofluid1_nHexane_Ethylene_HDPE7
 from shared_settings import sharedsettings
 
 def create_client():
@@ -11,11 +11,11 @@ def create_client():
 
 def create_input(client: EquiaClient):
     input = client.get_unflashed_property_input()
-    input.fluid_id = None
-    input.fluid = nHexane_Ethylene_HDPE7()
-    input.temperature = 500
-    input.pressure = 25
-    input.point_type = "Fixed Temperature/Pressure"
+    input.fluid = demofluid1_nHexane_Ethylene_HDPE7() #1 Use predefined demo fluid
+    input.fluidid = None #No needed since we supply fluid in line above
+    input.temperature = 500 # Temperature used in units 'Kelvin' as defined in units below
+    input.pressure = 25 # Pressure used in units 'Bar' as defined in units below
+    input.pointtype = "Fixed Temperature/Pressure"
     input.volumetype = "Auto"
     input.components = [
       CalculationComposition(mass=0.78), 

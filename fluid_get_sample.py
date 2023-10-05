@@ -41,7 +41,7 @@ async def request_fluid():
     client = create_client()
 
     input = client.get_fluid_get_input()
-    input.fluid_id = "D2A018DD-375A-474F-88A5-5931923B9ED4"
+    input.fluidid = "Fluid id here" # Replace value with your fluid id
 
     result: FluidGetResult = await client.call_fluid_get_async(input)
     # Always do the cleanup
