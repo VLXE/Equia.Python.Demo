@@ -37,10 +37,9 @@ Provide fluid: The fluid can be passes as a argument
  
 ## Run the flash sample
 
-First edit the file: shared_settings.py with the user id and access secret you obtained from VLXE
+First edit the file: shared_settings.py with the access key you obtained from VLXE
 ```
-user_id=
-access_secret=
+access_key=
 ```
 Open the file flash_sample and have a look at the code.  
 The pypi library: Equia provided by VLXE containes a lot of helper classes to get you started fast.  
