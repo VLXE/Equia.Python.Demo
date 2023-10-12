@@ -4,7 +4,7 @@ from equia.equia_client import EquiaClient
 from shared_settings import sharedsettings
 
 def create_client():
-    return EquiaClient(sharedsettings.url, sharedsettings.user_id, sharedsettings.access_secret)
+    return EquiaClient(sharedsettings.url, sharedsettings.access_key)
 
 
 def print_exception_info(exception_info: ExceptionInfo):

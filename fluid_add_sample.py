@@ -6,7 +6,7 @@ from equia.demofluids.demofluid1_nHexane_Ethylene_HDPE7 import demofluid1_nHexan
 from shared_settings import sharedsettings
 
 def create_client():
-    return EquiaClient(sharedsettings.url, sharedsettings.user_id, sharedsettings.access_secret)
+    return EquiaClient(sharedsettings.url, sharedsettings.access_key)
 
 
 def print_exception_info(exception_info: ExceptionInfo):

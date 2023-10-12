@@ -3,6 +3,5 @@
 
 class sharedsettings:
 
-    user_id = "" # Change to value provided by VLXE
-    access_secret = "" # Change to value provided by VLXE
+    access_key = "" # Change to value provided by VLXE
     url = "https://api.equia.com"
