@@ -19,7 +19,7 @@ To be able to run these samples, you need to install the following packages
 
 ## Before you start
 
-Contact VLXE to obtain your userid and access securet.
+Contact VLXE to obtain your access key.
 You can get these values by contacting [VLXE](https://vlxe.com/contact)
 
 !!! Please do not share or expose these values !!!
