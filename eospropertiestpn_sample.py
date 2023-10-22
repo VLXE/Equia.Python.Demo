@@ -1,6 +1,6 @@
 import asyncio
 import matplotlib.pyplot as plt
-from equia.models import CalculationComposition, ApiOutputUnflashedPropertyResult, ExceptionInfo, ProblemDetails
+from equia.models import CalculationComposition, EosPropertiesTPnCalculationResult, ExceptionInfo, ProblemDetails
 from equia.equia_client import EquiaClient
 from equia.demofluids.demofluid1_nHexane_Ethylene_HDPE7 import demofluid1_nHexane_Ethylene_HDPE7
 from shared_settings import sharedsettings
@@ -10,12 +10,11 @@ def create_client():
 
 
 def create_input(client: EquiaClient):
-    input = client.get_unflashed_property_input()
+    input = client.get_eospropertiestpn_input()
     input.fluid = demofluid1_nHexane_Ethylene_HDPE7() #1 Use predefined demo fluid
     input.fluidid = None #No needed since we supply fluid in line above
     input.temperature = 500 # Temperature used in units 'Kelvin' as defined in units below
     input.pressure = 25 # Pressure used in units 'Bar' as defined in units below
-    input.pointtype = "Fixed Temperature/Pressure"
     input.volumetype = "Auto"
     input.components = [
       CalculationComposition(mass=0.78), 
@@ -46,8 +45,11 @@ def print_problem_details(details: ProblemDetails):
 def print_value(input):
     print(input.ljust(25), end="", flush=True)
 
+def print_value_full(label, residual, ideal):
+    print(label.ljust(25), residual.ljust(25), ideal.ljust(25), end="", flush=True)
 
-def print_calculation_result(result: ApiOutputUnflashedPropertyResult):
+
+def print_calculation_result(result: EosPropertiesTPnCalculationResult):
     print("")
 
     print_value(f"Temperature [{result.temperature.units}]")
@@ -59,15 +61,27 @@ def print_calculation_result(result: ApiOutputUnflashedPropertyResult):
     print_value(f"Volume [{result.volume.units}]")
     print_value(str(result.volume.value))
     print("")
+    print_value_full(f"Property", "Residual", "Ideal")
+    print("")
+    print_value_full(f"Volume [{result.volume.units}]", str(result.residual.volume.value), str(result.ideal.volume.value))
+    print("")
+    print_value_full(f"Enthalpy [{result.residual.enthalpy.units}]", str(result.residual.enthalpy.value), str(result.ideal.enthalpy.value))
+    print("")
+    print_value_full(f"Entropy [{result.residual.entropy.units}]", str(result.residual.entropy.value), str(result.ideal.entropy.value))
+    print("")
+    print_value_full(f"Cp [{result.residual.cp.units}]", str(result.residual.cp.value), str(result.ideal.cp.value))
+    print("")
+    print_value_full(f"Cv [{result.residual.cv.units}]", str(result.residual.cv.value), str(result.ideal.cv.value))
+    print("")
 
 
 
-async def call_slepoint():
+async def call_eospropertiestpn():
     client = create_client()
 
     input = create_input(client)
 
-    result = await client.call_unflashed_properties_async(input)
+    result = await client.call_eospropertiestpn_async(input)
     # Always do the cleanup
     await client.cleanup()
 
@@ -79,4 +93,4 @@ async def call_slepoint():
         print_exception_info(result.exception_info)
 
 loop = asyncio.get_event_loop()
-loop.run_until_complete(call_slepoint())
+loop.run_until_complete(call_eospropertiestpn())
