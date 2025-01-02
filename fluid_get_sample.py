@@ -16,7 +16,7 @@ def print_exception_info(exception_info: ExceptionInfo):
 
 
 def print_problem_details(details: ProblemDetails):
-    print("------ A problem occured --------")
+    print("------ A problem occurred --------")
     print(f"Title: {details.title}")
     print(f"Type: {details.type}")
     print(f"Status: {details.status}")
