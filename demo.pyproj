@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{8cfe7d82-7c06-4184-8374-3433da5b52f3}</ProjectGuid>
     <ProjectHome />
-    <StartupFile>eospropertiestpn_sample.py</StartupFile>
+    <StartupFile>batchflash_sample.py</StartupFile>
     <SearchPath />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -21,6 +21,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="cloud_point_sample.py" />
+    <Compile Include="batchflash_sample.py" />
     <Compile Include="fluid_add_sample.py" />
     <Compile Include="eospropertiestpn_sample.py" />
     <Compile Include="slepoint_sample.py" />
