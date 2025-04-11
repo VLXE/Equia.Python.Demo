@@ -17,9 +17,9 @@ def create_input(client: EquiaClient):
     input.pressure = 1 # Pressure used in units 'Bar' as defined in units below
     input.flash_type = "Fixed Temperature/Pressure"
     input.components = [
-      CalculationComposition(mass=0.78), 
-      CalculationComposition(mass=0.02), 
-      CalculationComposition(mass=0.2)]
+      CalculationComposition(amount=0.78), 
+      CalculationComposition(amount=0.02), 
+      CalculationComposition(amount=0.2)]
     input.units = "C(In,Massfraction);C(Out,Massfraction);T(In,Kelvin);T(Out,Kelvin);P(In,Bar);P(Out,Bar);H(In,kJ/Kg);H(Out,kJ/Kg);S(In,kJ/(Kg Kelvin));S(Out,kJ/(Kg Kelvin));Cp(In,kJ/(Kg Kelvin));Cp(Out,kJ/(Kg Kelvin));Viscosity(In,centiPoise);Viscosity(Out,centiPoise);Surfacetension(In,N/m);Surfacetension(Out,N/m)"
     return input
 

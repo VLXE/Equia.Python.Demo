@@ -23,9 +23,9 @@ def create_input(client: EquiaClient):
     item1.temperature = 445
     item1.pressure = 20
     item1.components = [
-        CalculationComposition(mass=0.78),
-        CalculationComposition(mass=0.02),
-        CalculationComposition(mass=0.20)
+        CalculationComposition(amount=0.78),
+        CalculationComposition(amount=0.02),
+        CalculationComposition(amount=0.20)
     ]
     input.points.append(item1)
 
@@ -33,9 +33,9 @@ def create_input(client: EquiaClient):
     item2.temperature = 445
     item2.pressure = 45
     item2.components = [
-        CalculationComposition(mass=0.88),
-        CalculationComposition(mass=0.02),
-        CalculationComposition(mass=0.10)
+        CalculationComposition(amount=0.88),
+        CalculationComposition(amount=0.02),
+        CalculationComposition(amount=0.10)
     ]
     input.points.append(item2)
 

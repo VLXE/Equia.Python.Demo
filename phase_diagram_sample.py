@@ -38,9 +38,9 @@ async def call_phase_diagram():
     input.slve = True #Ask to include the SLVE part of the phasediagram
     input.vlle = True #Ask to include the VLLE part of the phasediagram
     input.components = [
-      CalculationComposition(mass=0.78), 
-      CalculationComposition(mass=0.02), 
-      CalculationComposition(mass=0.2)]
+      CalculationComposition(amount=0.78), 
+      CalculationComposition(amount=0.02), 
+      CalculationComposition(amount=0.2)]
     input.units = "C(In,Massfraction);C(Out,Massfraction);T(In,Kelvin);T(Out,Kelvin);P(In,Bar);P(Out,Bar);H(In,kJ/Kg);H(Out,kJ/Kg);S(In,kJ/(Kg Kelvin));S(Out,kJ/(Kg Kelvin));Cp(In,kJ/(Kg Kelvin));Cp(Out,kJ/(Kg Kelvin));Viscosity(In,centiPoise);Viscosity(Out,centiPoise);Surfacetension(In,N/m);Surfacetension(Out,N/m)"
 
     result = await client.call_phasediagram_standard_async(input)
