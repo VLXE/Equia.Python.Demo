@@ -14,7 +14,7 @@ def create_input(client: EquiaClient):
     input.fluid = demofluid1_nHexane_Ethylene_HDPE7() #1 Use predefined demo fluid
     input.fluidid = None # No needed since we supply fluid in line above
     input.pressure = 25 # Pressure used in units 'Bar' as defined in units below
-    input.pointtype = "Fixed Pressure"
+    input.pointtype = "FixedPressure"
     input.components = [
       CalculationComposition(amount=0.78), 
       CalculationComposition(amount=0.02), 
@@ -69,11 +69,11 @@ def print_composition(result: ApiOutputCalculationResultPoint):
     print("")
     print("Components")
     firstPhase = result.phases[0]
-    for i in range(len(firstPhase.composition.composition.components)):
+    for i in range(len(firstPhase.composition.components)):
         print_value(
-            f"{firstPhase.composition.composition.components[i].name} [{firstPhase.composition.composition_units}]")
+            f"{firstPhase.composition.components[i].name} [{firstPhase.composition.composition_units}]")
         for phase in result.phases:
-            print_value(str(phase.composition.composition.components[i].value))
+            print_value(str(phase.composition.components[i].value))
         print("")
 
 
@@ -159,8 +159,8 @@ def print_polymer_moments(result: ApiOutputCalculationResultPoint):
 def print_polymer_distributions(result: ApiOutputCalculationResultPoint):
     firstPhase = result.phases[0]
     # find components with distribution (polymers)
-    for compIndex in range(len(firstPhase.composition.composition.components)):
-        component = firstPhase.composition.composition.components[compIndex]
+    for compIndex in range(len(firstPhase.composition.components)):
+        component = firstPhase.composition.components[compIndex]
         if (len(component.distribution) <= 0):
             continue
 
@@ -174,7 +174,7 @@ def print_polymer_distributions(result: ApiOutputCalculationResultPoint):
             print("")
             print_value("")
             for phaseIndex in range(len(result.phases)):
-                distribution = result.phases[phaseIndex].composition.composition.components[compIndex].distribution[distIndex]
+                distribution = result.phases[phaseIndex].composition.components[compIndex].distribution[distIndex]
                 print_value(str(distribution.value))
 
 
@@ -185,8 +185,8 @@ def draw_polymer_distributions(result: ApiOutputCalculationResultPoint):
     plt.ylabel("Mass fraction")
     for i in range(len(result.phases)):
         phase = result.phases[i]
-        for j in range(len(phase.composition.composition.components)):
-            component = phase.composition.composition.components[j]
+        for j in range(len(phase.composition.components)):
+            component = phase.composition.components[j]
             if (len(component.distribution) > 0):
                 plt.plot(list(map(lambda point: point.value, component.distribution)), list(
                     map(lambda point: point.molar_mass, component.distribution)), label=f"{component.name}: {phase.phase_label}")

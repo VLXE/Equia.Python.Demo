@@ -31,7 +31,7 @@ def print_problem_details(details: ProblemDetails):
 async def call_phase_diagram():
     client = create_client()
 
-    input = client.get_phasediagam_standard_input()
+    input = client.get_phasediagram_standard_input()
     input.fluid = demofluid1_nHexane_Ethylene_HDPE7() #1 Use predefined demo fluid
     input.fluidid = None #No needed since we supply fluid in line above
     input.sle = True #Ask to include the SLE part of the phasediagram
