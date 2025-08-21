@@ -43,11 +43,11 @@ access_key=
 ```
 Open the file flash_sample and have a look at the code.  
 The pypi library: Equia provided by VLXE containes a lot of helper classes to get you started fast.  
-First we obtaine an instance of the class: 'FlashCalculationInput'. It holds all the input arguments needed to perform a flash.
+First we obtaine an instance of the class: 'FlashFixedTemperaturePressureCalculationInput'. It holds all the input arguments needed to perform a flash.
 We call it: 'input'  
 We provide a fluid using the 'Fluid' argument that works just like a project sheet in the Excel version of VLXE
 Temperature and pressure is set.  
-Then we set the type of flash calculation. Here we select: "Fixed Temperature/Pressure"   
+Each web API service a specific type of flash. Here we perform a flash at fixed temperature and pressure.   
 Composition is set for each of the three components in the fluid  
 Last the units are set.
 

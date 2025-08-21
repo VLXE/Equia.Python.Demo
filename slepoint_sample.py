@@ -10,11 +10,10 @@ def create_client():
 
 
 def create_input(client: EquiaClient):
-    input = client.get_sle_point_input()
+    input = client.get_sle_point_fixed_pressure_input()
     input.fluid = demofluid1_nHexane_Ethylene_HDPE7() #1 Use predefined demo fluid
     input.fluidid = None # No needed since we supply fluid in line above
     input.pressure = 25 # Pressure used in units 'Bar' as defined in units below
-    input.pointtype = "FixedPressure"
     input.components = [
       CalculationComposition(amount=0.78), 
       CalculationComposition(amount=0.02), 
@@ -200,7 +199,7 @@ async def call_slepoint():
 
     input = create_input(client)
 
-    result = await client.call_sle_point_async(input)
+    result = await client.call_sle_point_fixed_pressure_async(input)
     # Always do the cleanup
     await client.cleanup()
 

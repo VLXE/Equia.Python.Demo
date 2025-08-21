@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{8cfe7d82-7c06-4184-8374-3433da5b52f3}</ProjectGuid>
     <ProjectHome />
-    <StartupFile>batchflash_sample.py</StartupFile>
+    <StartupFile>slepoint_sample.py</StartupFile>
     <SearchPath />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>

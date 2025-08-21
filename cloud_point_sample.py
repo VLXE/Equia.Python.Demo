@@ -10,11 +10,10 @@ def create_client():
 
 
 def create_input(client: EquiaClient):
-    input = client.get_cloud_point_input()
+    input = client.get_cloud_point_fixed_temperature_input()
     input.fluid = demofluid1_nHexane_Ethylene_HDPE7() #1 Use predefined demo fluid
     input.fluidid = None #No needed since we supply fluid in line above
     input.temperature = 300 # Temperature used in units 'Kelvin' as defined in units below
-    input.pointtype = "FixedTemperature" # Type of cloud point
     input.components = [
       CalculationComposition(amount=0.78), 
       CalculationComposition(amount=0.02), 
@@ -200,7 +199,7 @@ async def call_cloud_point():
 
     input = create_input(client)
 
-    result = await client.call_cloud_point_async(input)
+    result = await client.call_cloud_point_fixed_temperature_async(input)
     # Always do the cleanup
     await client.cleanup()
 

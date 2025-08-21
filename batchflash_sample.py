@@ -4,21 +4,21 @@ from equia.models import CalculationComposition, ApiOutputCalculationResultPoint
 from equia.equia_client import EquiaClient
 from equia.demofluids.demofluid1_nHexane_Ethylene_HDPE7 import demofluid1_nHexane_Ethylene_HDPE7
 from shared_settings import sharedsettings
-from equia.models.batchflash_calculation_item import BatchFlashCalculationItem
+from equia.models.batchflash_fixed_temperature_pressure_calculation_item import BatchFlashFixedTemperaturePressureCalculationItem
 
 def create_client():
     return EquiaClient(sharedsettings.url, sharedsettings.access_key)
 
 
 def create_input(client: EquiaClient):
-    input = client.get_batchflash_input()
+    input = client.get_batchflash_fixed_temperature_pressure_input()
     input.fluid = demofluid1_nHexane_Ethylene_HDPE7() #1 Use predefined demo fluid
     input.fluidid = None #No needed since we supply fluid in line above
     input.temperature = 300 # Temperature used in units 'Kelvin' as defined in units below
     input.pressure = 1 # Pressure used in units 'Bar' as defined in units below
     input.units = "C(In,Massfraction);C(Out,Massfraction);T(In,Kelvin);T(Out,Kelvin);P(In,Bar);P(Out,Bar);H(In,kJ/Kg);H(Out,kJ/Kg);S(In,kJ/(Kg Kelvin));S(Out,kJ/(Kg Kelvin));Cp(In,kJ/(Kg Kelvin));Cp(Out,kJ/(Kg Kelvin));Viscosity(In,centiPoise);Viscosity(Out,centiPoise);Surfacetension(In,N/m);Surfacetension(Out,N/m)"
     
-    item1 = BatchFlashCalculationItem()
+    item1 = BatchFlashFixedTemperaturePressureCalculationItem()
     item1.temperature = 445
     item1.pressure = 20
     item1.components = [
@@ -28,7 +28,7 @@ def create_input(client: EquiaClient):
     ]
     input.points.append(item1)
 
-    item2 = BatchFlashCalculationItem()
+    item2 = BatchFlashFixedTemperaturePressureCalculationItem()
     item2.temperature = 445
     item2.pressure = 45
     item2.components = [
@@ -218,7 +218,7 @@ async def call_batchflash():
 
     input = create_input(client)
 
-    result = await client.call_batchflash_async(input)
+    result = await client.call_batchflash_fixed_temperature_pressure_async(input)
     # Always do the cleanup
     await client.cleanup()
 

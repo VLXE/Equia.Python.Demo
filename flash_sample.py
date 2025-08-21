@@ -10,7 +10,7 @@ def create_client():
 
 
 def create_input(client: EquiaClient):
-    input = client.get_flash_input()
+    input = client.get_flash_fixed_temperature_pressure_input()
     input.fluid = demofluid1_nHexane_Ethylene_HDPE7() #1 Use predefined demo fluid
     input.fluidid = None #No needed since we supply fluid in line above
     input.temperature = 300 # Temperature used in units 'Kelvin' as defined in units below
@@ -200,7 +200,7 @@ async def call_flash():
 
     input = create_input(client)
 
-    result = await client.call_flash_async(input)
+    result = await client.call_flash_fixed_temperature_pressure_async(input)
     # Always do the cleanup
     await client.cleanup()
 
