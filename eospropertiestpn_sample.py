@@ -1,5 +1,4 @@
 import asyncio
-import matplotlib.pyplot as plt
 from equia.models import CalculationComposition, EosPropertiesTPnCalculationResult, ExceptionInfo, ProblemDetails
 from equia.equia_client import EquiaClient
 from equia.demofluids.demofluid1_nHexane_Ethylene_HDPE7 import demofluid1_nHexane_Ethylene_HDPE7

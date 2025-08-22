@@ -17,25 +17,20 @@ def create_input(client: EquiaClient):
     input.temperature = 300 # Temperature used in units 'Kelvin' as defined in units below
     input.pressure = 1 # Pressure used in units 'Bar' as defined in units below
     input.units = "C(In,Massfraction);C(Out,Massfraction);T(In,Kelvin);T(Out,Kelvin);P(In,Bar);P(Out,Bar);H(In,kJ/Kg);H(Out,kJ/Kg);S(In,kJ/(Kg Kelvin));S(Out,kJ/(Kg Kelvin));Cp(In,kJ/(Kg Kelvin));Cp(Out,kJ/(Kg Kelvin));Viscosity(In,centiPoise);Viscosity(Out,centiPoise);Surfacetension(In,N/m);Surfacetension(Out,N/m)"
-    
-    item1 = BatchFlashFixedTemperaturePressureCalculationItem()
-    item1.temperature = 445
-    item1.pressure = 20
-    item1.components = [
+    input.components = [
         CalculationComposition(amount=0.78),
         CalculationComposition(amount=0.02),
         CalculationComposition(amount=0.20)
     ]
+    
+    item1 = BatchFlashFixedTemperaturePressureCalculationItem()
+    item1.temperature = 445
+    item1.pressure = 20
     input.points.append(item1)
 
     item2 = BatchFlashFixedTemperaturePressureCalculationItem()
     item2.temperature = 445
     item2.pressure = 45
-    item2.components = [
-        CalculationComposition(amount=0.88),
-        CalculationComposition(amount=0.02),
-        CalculationComposition(amount=0.10)
-    ]
     input.points.append(item2)
 
     return input

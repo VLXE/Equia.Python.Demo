@@ -1,6 +1,6 @@
 from ast import Str
 import asyncio
-from equia.models import FluidAddResult, ExceptionInfo, ApiFluid, ProblemDetails
+from equia.models import FluidAddResult, ExceptionInfo, ProblemDetails
 from equia.equia_client import EquiaClient
 from equia.demofluids.demofluid1_nHexane_Ethylene_HDPE7 import demofluid1_nHexane_Ethylene_HDPE7
 from shared_settings import sharedsettings

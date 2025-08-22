@@ -1,5 +1,4 @@
 import asyncio
-from pickle import TRUE
 import matplotlib.pyplot as plt
 from equia.models import CalculationComposition, ExceptionInfo, ProblemDetails
 from equia.equia_client import EquiaClient
