@@ -10,17 +10,17 @@ def create_client():
 
 
 def create_input(client: EquiaClient):
-    input = client.get_flash_fixed_temperature_pressure_input()
-    input.fluid = demofluid1_nHexane_Ethylene_HDPE7() #1 Use predefined demo fluid
-    input.fluidid = None #No needed since we supply fluid in line above
-    input.temperature = 300 # Temperature used in units 'Kelvin' as defined in units below
-    input.pressure = 1 # Pressure used in units 'Bar' as defined in units below
-    input.components = [
-      CalculationComposition(amount=0.78), 
-      CalculationComposition(amount=0.02), 
+    argument = client.get_flash_fixed_temperature_pressure_input()
+    argument.fluid = demofluid1_nHexane_Ethylene_HDPE7() #1 Use predefined demo fluid
+    argument.fluidid = None #No needed since we supply fluid in line above
+    argument.temperature = 300 # Temperature used in units 'Kelvin' as defined in units below
+    argument.pressure = 1 # Pressure used in units 'Bar' as defined in units below
+    argument.components = [
+      CalculationComposition(amount=0.78),
+      CalculationComposition(amount=0.02),
       CalculationComposition(amount=0.2)]
-    input.units = "C(In,Massfraction);C(Out,Massfraction);T(In,Kelvin);T(Out,Kelvin);P(In,Bar);P(Out,Bar);H(In,kJ/Kg);H(Out,kJ/Kg);S(In,kJ/(Kg Kelvin));S(Out,kJ/(Kg Kelvin));Cp(In,kJ/(Kg Kelvin));Cp(Out,kJ/(Kg Kelvin));Viscosity(In,centiPoise);Viscosity(Out,centiPoise);Surfacetension(In,N/m);Surfacetension(Out,N/m)"
-    return input
+    argument.units = "C(In,Massfraction);C(Out,Massfraction);T(In,Kelvin);T(Out,Kelvin);P(In,Bar);P(Out,Bar);H(In,kJ/Kg);H(Out,kJ/Kg);S(In,kJ/(Kg Kelvin));S(Out,kJ/(Kg Kelvin));Cp(In,kJ/(Kg Kelvin));Cp(Out,kJ/(Kg Kelvin));Viscosity(In,centiPoise);Viscosity(Out,centiPoise);Surfacetension(In,N/m);Surfacetension(Out,N/m)"
+    return argument
 
 
 def print_exception_info(exception_info: ExceptionInfo):
@@ -41,8 +41,8 @@ def print_problem_details(details: ProblemDetails):
     print(f"Additional properties: {details.additional_properties}")
 
 
-def print_value(input):
-    print(input.ljust(25), end="", flush=True)
+def print_value(argument):
+    print(argument.ljust(25), end="", flush=True)
 
 
 def print_calculation_result(result: ApiOutputCalculationResultPoint):
@@ -80,15 +80,15 @@ def print_composition(result: ApiOutputCalculationResultPoint):
 def print_properties(result: ApiOutputCalculationResultPoint):
     firstPhase = result.phases[0]
     print("")
-    print_value(f"Phase Fraction [Mole]")
+    print_value("Phase Fraction [Mole]")
     for phase in result.phases:
         print_value(str(phase.mole_percent.value))
     print("")
-    print_value(f"Phase Fraction [Weight]")
+    print_value("Phase Fraction [Weight]")
     for phase in result.phases:
         print_value(str(phase.weight_percent.value))
     print("")
-    print_value(f"Compressibility [-]")
+    print_value("Compressibility [-]")
     for phase in result.phases:
         print_value(str(phase.compressibility.value))
     print("")
@@ -198,9 +198,9 @@ def draw_polymer_distributions(result: ApiOutputCalculationResultPoint):
 async def call_flash():
     client = create_client()
 
-    input = create_input(client)
+    argument = create_input(client)
 
-    result = await client.call_flash_fixed_temperature_pressure_async(input)
+    result = await client.call_flash_fixed_temperature_pressure_async(argument)
     # Always do the cleanup
     await client.cleanup()
 

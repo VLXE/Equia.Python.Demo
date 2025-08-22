@@ -34,10 +34,10 @@ def print_fluid(fluidid: Str):
 async def request_fluid():
     client = create_client()
 
-    input = client.get_fluid_add_input()
-    input.fluid = fluid = demofluid1_nHexane_Ethylene_HDPE7()
+    argument = client.get_fluid_add_input()
+    argument.fluid = demofluid1_nHexane_Ethylene_HDPE7()
 
-    result: FluidAddResult = await client.call_fluid_add_async(input)
+    result: FluidAddResult = await client.call_fluid_add_async(argument)
     # Always do the cleanup
     await client.cleanup()
 

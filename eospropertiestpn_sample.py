@@ -9,18 +9,18 @@ def create_client():
 
 
 def create_input(client: EquiaClient):
-    input = client.get_eospropertiestpn_input()
-    input.fluid = demofluid1_nHexane_Ethylene_HDPE7() #1 Use predefined demo fluid
-    input.fluidid = None #No needed since we supply fluid in line above
-    input.temperature = 500 # Temperature used in units 'Kelvin' as defined in units below
-    input.pressure = 25 # Pressure used in units 'Bar' as defined in units below
-    input.volumetype = "Auto"
-    input.components = [
-      CalculationComposition(amount=0.78), 
-      CalculationComposition(amount=0.02), 
+    argument = client.get_eospropertiestpn_input()
+    argument.fluid = demofluid1_nHexane_Ethylene_HDPE7() #1 Use predefined demo fluid
+    argument.fluidid = None #No needed since we supply fluid in line above
+    argument.temperature = 500 # Temperature used in units 'Kelvin' as defined in units below
+    argument.pressure = 25 # Pressure used in units 'Bar' as defined in units below
+    argument.volumetype = "Auto"
+    argument.components = [
+      CalculationComposition(amount=0.78),
+      CalculationComposition(amount=0.02),
       CalculationComposition(amount=0.2)]
-    input.units = "C(In,Massfraction);C(Out,Massfraction);T(In,Kelvin);T(Out,Kelvin);P(In,Bar);P(Out,Bar);H(In,kJ/Kg);H(Out,kJ/Kg);S(In,kJ/(Kg Kelvin));S(Out,kJ/(Kg Kelvin));Cp(In,kJ/(Kg Kelvin));Cp(Out,kJ/(Kg Kelvin));Viscosity(In,centiPoise);Viscosity(Out,centiPoise);Surfacetension(In,N/m);Surfacetension(Out,N/m)"
-    return input
+    argument.units = "C(In,Massfraction);C(Out,Massfraction);T(In,Kelvin);T(Out,Kelvin);P(In,Bar);P(Out,Bar);H(In,kJ/Kg);H(Out,kJ/Kg);S(In,kJ/(Kg Kelvin));S(Out,kJ/(Kg Kelvin));Cp(In,kJ/(Kg Kelvin));Cp(Out,kJ/(Kg Kelvin));Viscosity(In,centiPoise);Viscosity(Out,centiPoise);Surfacetension(In,N/m);Surfacetension(Out,N/m)"
+    return argument
 
 
 def print_exception_info(exception_info: ExceptionInfo):
@@ -41,8 +41,8 @@ def print_problem_details(details: ProblemDetails):
     print(f"Additional properties: {details.additional_properties}")
 
 
-def print_value(input):
-    print(input.ljust(25), end="", flush=True)
+def print_value(argument):
+    print(argument.ljust(25), end="", flush=True)
 
 def print_value_full(label, residual, ideal):
     print(label.ljust(25), residual.ljust(25), ideal.ljust(25), end="", flush=True)
@@ -60,7 +60,7 @@ def print_calculation_result(result: EosPropertiesTPnCalculationResult):
     print_value(f"Volume [{result.volume.units}]")
     print_value(str(result.volume.value))
     print("")
-    print_value_full(f"Property", "Residual", "Ideal")
+    print_value_full("Property", "Residual", "Ideal")
     print("")
     print_value_full(f"Volume [{result.volume.units}]", str(result.residual.volume.value), str(result.ideal.volume.value))
     print("")
@@ -78,9 +78,9 @@ def print_calculation_result(result: EosPropertiesTPnCalculationResult):
 async def call_eospropertiestpn():
     client = create_client()
 
-    input = create_input(client)
+    argument = create_input(client)
 
-    result = await client.call_eospropertiestpn_async(input)
+    result = await client.call_eospropertiestpn_async(argument)
     # Always do the cleanup
     await client.cleanup()
 

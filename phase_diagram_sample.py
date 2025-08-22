@@ -30,19 +30,19 @@ def print_problem_details(details: ProblemDetails):
 async def call_phase_diagram():
     client = create_client()
 
-    input = client.get_phasediagram_standard_input()
-    input.fluid = demofluid1_nHexane_Ethylene_HDPE7() #1 Use predefined demo fluid
-    input.fluidid = None #No needed since we supply fluid in line above
-    input.sle = True #Ask to include the SLE part of the phasediagram
-    input.slve = True #Ask to include the SLVE part of the phasediagram
-    input.vlle = True #Ask to include the VLLE part of the phasediagram
-    input.components = [
-      CalculationComposition(amount=0.78), 
-      CalculationComposition(amount=0.02), 
+    argument = client.get_phasediagram_standard_input()
+    argument.fluid = demofluid1_nHexane_Ethylene_HDPE7() #1 Use predefined demo fluid
+    argument.fluidid = None #No needed since we supply fluid in line above
+    argument.sle = True #Ask to include the SLE part of the phasediagram
+    argument.slve = True #Ask to include the SLVE part of the phasediagram
+    argument.vlle = True #Ask to include the VLLE part of the phasediagram
+    argument.components = [
+      CalculationComposition(amount=0.78),
+      CalculationComposition(amount=0.02),
       CalculationComposition(amount=0.2)]
-    input.units = "C(In,Massfraction);C(Out,Massfraction);T(In,Kelvin);T(Out,Kelvin);P(In,Bar);P(Out,Bar);H(In,kJ/Kg);H(Out,kJ/Kg);S(In,kJ/(Kg Kelvin));S(Out,kJ/(Kg Kelvin));Cp(In,kJ/(Kg Kelvin));Cp(Out,kJ/(Kg Kelvin));Viscosity(In,centiPoise);Viscosity(Out,centiPoise);Surfacetension(In,N/m);Surfacetension(Out,N/m)"
+    argument.units = "C(In,Massfraction);C(Out,Massfraction);T(In,Kelvin);T(Out,Kelvin);P(In,Bar);P(Out,Bar);H(In,kJ/Kg);H(Out,kJ/Kg);S(In,kJ/(Kg Kelvin));S(Out,kJ/(Kg Kelvin));Cp(In,kJ/(Kg Kelvin));Cp(Out,kJ/(Kg Kelvin));Viscosity(In,centiPoise);Viscosity(Out,centiPoise);Surfacetension(In,N/m);Surfacetension(Out,N/m)"
 
-    result = await client.call_phasediagram_standard_async(input)
+    result = await client.call_phasediagram_standard_async(argument)
     # Always do the cleanup
     await client.cleanup()
 
@@ -55,16 +55,16 @@ async def call_phase_diagram():
 
         if (len(result.curve.phaseenvelope) > 0):
             plt.plot(list(map(lambda point: point.temperature, result.curve.phaseenvelope)), list(
-                map(lambda point: point.pressure, result.curve.phaseenvelope)), label=f"Phase Envelope")
+                map(lambda point: point.pressure, result.curve.phaseenvelope)), label="Phase Envelope")
         if (len(result.curve.vlle) > 0):
             plt.plot(list(map(lambda point: point.temperature, result.curve.vlle)), list(
-                map(lambda point: point.pressure, result.curve.vlle)), label=f"VLLE")
+                map(lambda point: point.pressure, result.curve.vlle)), label="VLLE")
         if (len(result.curve.sle) > 0):
             plt.plot(list(map(lambda point: point.temperature, result.curve.sle)), list(
-                map(lambda point: point.pressure, result.curve.sle)), label=f"SLE")
+                map(lambda point: point.pressure, result.curve.sle)), label="SLE")
         if (len(result.curve.slve) > 0):
             plt.plot(list(map(lambda point: point.temperature, result.curve.slve)), list(
-                map(lambda point: point.pressure, result.curve.slve)), label=f"SLVE")
+                map(lambda point: point.pressure, result.curve.slve)), label="SLVE")
 
         plt.legend()
         plt.show()

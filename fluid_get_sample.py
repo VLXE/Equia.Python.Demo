@@ -40,10 +40,10 @@ def print_fluid(fluid: ApiFluid):
 async def request_fluid():
     client = create_client()
 
-    input = client.get_fluid_get_input()
-    input.fluidid = "Fluid id here" # Replace value with your fluid id
+    argument = client.get_fluid_get_input()
+    argument.fluidid = "Fluid id here" # Replace value with your fluid id
 
-    result: FluidGetResult = await client.call_fluid_get_async(input)
+    result: FluidGetResult = await client.call_fluid_get_async(argument)
     # Always do the cleanup
     await client.cleanup()
 
